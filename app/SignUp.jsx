@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, TextInput, Pressable , KeyboardAvoidingView, Alert} from 'react-native'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { MaterialIcons } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -8,8 +8,6 @@ import { useRouter } from 'expo-router';
 // import axios from 'axios';
 // import { Axios } from 'axios';
 import axios from 'axios';
-
-
 
 
 export default function SignUp() {

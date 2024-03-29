@@ -5,6 +5,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated, { FadeIn, Easing ,  FlipInEasyY} from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignIn() {
     const [email, setEmail] = useState("")
@@ -28,9 +30,21 @@ const validaton = ()=>{
  const handleSubmit = ()=>{
     if(validaton()){
         console.log("Submitted", email, Password);
-        setEmail("");
-        setPassword("")
-        setErrors({})
+        const userData={
+            email:email,
+            password:Password,
+        }
+        axios.post('http://192.168.126.138:5001/signin',userData).then(res =>{console.log(res.data)
+        if(res.data.status=="ok"){
+            Alert.alert("login Successfully");
+            AsyncStorage.setItem("token", res.data.data);
+        }
+    })
+
+       
+        // setEmail("");
+        // setPassword("")
+        // setErrors({})
 
         router.push('Home')
     }
